@@ -12,6 +12,13 @@ http://localhost:8080 in your browser.
 You can also import the project to your IDE of choice as you would with any
 Maven project.
 
+### Using Docker
+```bash
+  # From project root 
+  docker build -f docker/dockerfile -t <image name> .
+  docker run -d -p 8080:8080 <image name or id> java -jar target/projecttryhilla-1.0-SNAPSHOT.jar
+```
+
 ## Deploying to Production
 
 To create a production build, call `mvnw clean package -Pproduction` (Windows),

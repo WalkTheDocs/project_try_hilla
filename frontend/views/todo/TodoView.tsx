@@ -1,4 +1,4 @@
-import type Todo from 'Frontend/generated/com/example/application/Todo';
+import type Todo from 'Frontend/generated/com/example/application/entities/Todo';
 import { useEffect, useState } from 'react';
 import { FormikErrors, useFormik } from 'formik';
 import { Button } from '@hilla/react-components/Button.js';

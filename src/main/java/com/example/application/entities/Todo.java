@@ -5,22 +5,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
-@Entity 
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
 public class Todo {
 
   @Id
   @GeneratedValue
   private Integer id;
 
+  @Setter
   private boolean done = false;
 
-  @NotBlank 
+  @NotBlank
+  @Getter
+  @Setter
   private String task;
 
-  public Todo() {}
+  @Getter
+  @Setter
+  private String description;
 
-  public Todo(String task) {
+  public Todo() {
+  }
+
+  public Todo(String task, String description) {
     this.task = task;
+    this.description = description;
   }
 
   public Integer getId() {
@@ -33,17 +45,5 @@ public class Todo {
 
   public boolean isDone() {
     return done;
-  }
-
-  public void setDone(boolean done) {
-    this.done = done;
-  }
-
-  public String getTask() {
-    return task;
-  }
-
-  public void setTask(String task) {
-    this.task = task;
   }
 }

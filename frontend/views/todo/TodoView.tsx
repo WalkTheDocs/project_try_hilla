@@ -49,6 +49,13 @@ export default function TodoView() {
     setTodos(todos.map((item) => (item.id === todo.id ? saved : item)));
   }
 
+  async function deleteTodo(todo: Todo) {
+    const deletedTodoId = await TodoEndpoint.delete(todo);
+    if (deletedTodoId) {
+      setTodos(todos.filter((t) => t.id != deletedTodoId));
+    }
+  }
+
   return (
     <>
       <div className="m-m flex items-baseline gap-m">
@@ -59,6 +66,13 @@ export default function TodoView() {
           onChange={formik.handleChange}
           onBlur={formik.handleChange}
         />
+        <TextField
+          name="description"
+          label="Description"
+          value={formik.values.description}
+          onChange={formik.handleChange}
+          onBlur={formik.handleChange}
+        />
         <Button theme="primary" disabled={formik.isSubmitting} onClick={formik.submitForm}>
           Add
         </Button>
@@ -66,13 +80,15 @@ export default function TodoView() {
 
       <div className="m-m flex flex-col items-stretch gap-s">
         {todos.map((todo) => (
-          <Checkbox
-            key={todo.id}
-            checked={todo.done}
-            onCheckedChanged={({ detail: { value } }) => changeStatus(todo, value)}
-          >
-            {todo.task}
-          </Checkbox>
+          <div key={todo.id}>
+            <Checkbox checked={todo.done} onCheckedChanged={({ detail: { value } }) => changeStatus(todo, value)}>
+              {todo.task}
+            </Checkbox>
+            <TextField value={todo.description || ''} disabled />
+            <Button theme="primary" disabled={formik.isSubmitting} onClick={() => deleteTodo(todo)}>
+              delete
+            </Button>
+          </div>
         ))}
       </div>
     </>

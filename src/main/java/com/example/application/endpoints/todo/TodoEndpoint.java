@@ -24,4 +24,9 @@ public class TodoEndpoint {
     public Todo save(Todo todo) {
         return repository.save(todo);
     }
+
+    public Integer delete(Todo todo) {
+        repository.delete(todo);
+        return todo.getId();
+    }
 }

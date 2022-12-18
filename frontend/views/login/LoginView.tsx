@@ -3,6 +3,7 @@ import { Button } from '@hilla/react-components/Button.js';
 import { TextField } from '@hilla/react-components/TextField.js';
 import { PasswordField } from '@hilla/react-components/PasswordField.js';
 import { uiStore } from 'Frontend/stores/app-store';
+import { useNavigate } from 'react-router-dom';
 
 type LoginCredentials = {
   username: string;
@@ -10,6 +11,7 @@ type LoginCredentials = {
 };
 
 export default function LoginView() {
+  const navigate = useNavigate();
   const empty: LoginCredentials = { username: '', password: '' };
 
   const formik = useFormik({
@@ -17,7 +19,7 @@ export default function LoginView() {
     onSubmit: async (credentials: LoginCredentials, { setSubmitting, setErrors }) => {
       try {
         await uiStore.login(credentials.username, credentials.password);
-        formik.resetForm();
+        navigate('/')
       } catch (e: unknown) {
         console.log(e);
       } finally {

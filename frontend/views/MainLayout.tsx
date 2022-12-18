@@ -1,7 +1,9 @@
 import { AppLayout } from '@hilla/react-components/AppLayout.js';
+import { Button } from '@hilla/react-components/Button.js';
 import { DrawerToggle } from '@hilla/react-components/DrawerToggle.js';
 import { Item } from '@hilla/react-components/Item.js';
 import { Scroller } from '@hilla/react-components/Scroller.js';
+import { uiStore } from 'Frontend/stores/app-store';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import css from './MainLayout.module.css';
 import views, { RequiredViewInfoMap } from './views.js';
@@ -14,6 +16,10 @@ export default function MenuOnLeftLayout() {
     <AppLayout className="block h-full" primarySection="drawer">
       <header slot="drawer">
         <h1 className="text-l m-0">project_try_hilla</h1>
+      </header>
+      <header slot="navbar">
+        <DrawerToggle />
+        <Button onClick={() => uiStore.logout()}>Log Out</Button>
       </header>
       <Scroller slot="drawer" scroll-direction="vertical">
         <nav>
@@ -28,11 +34,6 @@ export default function MenuOnLeftLayout() {
         </nav>
       </Scroller>
       <footer slot="drawer" />
-
-      <DrawerToggle slot="navbar" aria-label="Menu toggle"></DrawerToggle>
-      <h2 slot="navbar" className="text-l m-0">
-        {currentTitle}
-      </h2>
 
       <Outlet />
     </AppLayout>

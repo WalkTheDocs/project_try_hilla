@@ -2,14 +2,15 @@ package com.example.application.endpoints.todo;
 
 import java.util.List;
 
+import javax.annotation.security.PermitAll;
+
 import com.example.application.entities.Todo;
 import com.example.application.repositories.TodoRepository;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.Endpoint;
 import dev.hilla.Nonnull;
 
 @Endpoint
-@AnonymousAllowed
+@PermitAll
 public class TodoEndpoint {
     private TodoRepository repository;
 
